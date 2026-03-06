@@ -22,28 +22,26 @@ let uploadedImages = [];
 
 // main.js - Update loadGallery and add Batch Delete
 
-// main.js - Updated loadGallery to show/hide Select All
 async function loadGallery() {
+  // We add { recursive: false } so it only looks at the main images, 
+  // not the ones inside friend folders like /flora/ or /richard/
   const { data, error } = await supabaseClient.storage
     .from("gallery")
-    .list('', { limit: 1000 });
+    .list('', { 
+      limit: 1000,
+      options: { recursive: false } 
+    });
 
   const gallery = document.getElementById("galleryContainer");
-  const batchBtn = document.getElementById("batchDeleteBtn");
-  const selectAllContainer = document.getElementById("selectAllContainer");
-  const selectAllCheckbox = document.getElementById("selectAllCheckbox");
-
   if (!gallery || error) return;
 
   gallery.innerHTML = "";
-  uploadedImages = []; 
-  batchBtn.style.display = "none";
-  selectAllCheckbox.checked = false; // Reset the checkbox
-
-  // Show the "Select All" option only if there are pictures to select
-  selectAllContainer.style.display = data.length > 0 ? "block" : "none";
+  uploadedImages = [];
 
   data.forEach((file, index) => {
+    // This line ensures we don't try to display the folders themselves as images
+    if (file.id === null) return; 
+
     const url = `${SUPABASE_URL}/storage/v1/object/public/gallery/${file.name}`;
     uploadedImages.push(url);
 
@@ -444,3 +442,14 @@ function openLightboxDirect(url) {
     lbImg.src = url;
 }
 
+// Inside your loadGallery forEach loop:
+const wrapper = document.createElement("div");
+wrapper.className = "media-item";
+
+// Add the Infinity Like Overlay
+const overlay = document.createElement("div");
+overlay.className = "ig-overlay";
+overlay.innerHTML = "<span>❤️ ∞</span>"; // Infinity Likes
+wrapper.appendChild(overlay);
+
+const media = document.createElement("img"); // your existing media creation
