@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WINX CLUB</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <div class="sparkle-container"></div>
+  
+  <h1 class="title">WINX CLUB</h1>
+
+<ul class="tabs">
+  <li data-tab-target="#Home" class="tab">Home</li>
+  <li data-tab-target="#Gallery" class="tab">Gallery</li>
+  <li data-tab-target="#Kalokohan" class="tab">Winx Chaos</li>
+  <li data-tab-target="#Letter" class="tab">Letter</li>
+</ul>
+
+  <div class="tab-content">
+    <div id="Home" data-tab-content class="active">
+      <h2 class="section-title">ABOUT US</h2>
+      <p class="introduction">
+        Imagine a friendship so vivacious that we imagine ourselves as magical fairies—winx club that is. 
+        We commemorate our last months of high school here on this website where we record ourselves 
+        so that we have something to visit and look back on.
+      </p>
+      <div class="container">
+        <img class="grphoto" src="grphoto.jpg" alt="Group Photo">
+      </div>
+    </div>
+
+    <div id="Gallery" data-tab-content>
+  <h2 class="section-title">Our Gallery 📸</h2>
+  
+  <div class="upload-box-minimal">
+    <label for="fileInput" class="minimal-plus-upload" title="Add new magic memory ✨">
+      <span class="plus-icon">+</span>
+    </label>
+    <input type="file" id="fileInput" accept="image/*,video/*" multiple onchange="autoUpload()">
+
+    <button id="batchDeleteBtn" onclick="deleteSelectedMedia()" class="minimal-delete-btn" style="display:none;">
+      ✕ Delete Selected
+    </button>
+  </div>
+
+  <div id="selectAllContainer" style="display:none; text-align: center; margin-bottom: 15px;">
+    <input type="checkbox" id="selectAllCheckbox" onclick="toggleSelectAll()">
+    <label for="selectAllCheckbox" class="select-all-label">Select All Memories</label>
+  </div>
+
+  <div id="progressContainer" style="display: none; margin: 10px auto; width: 60%; max-width: 300px;">
+    <div id="progressBar-minimal"><div id="progressFill"></div></div>
+    <p id="progressText" class="progress-info-minimal"></p>
+  </div>
+
+  <div id="galleryContainer" class="gallery-dynamic"></div>
+</div>
+
+<div id="Kalokohan" data-tab-content>
+  <h2 class="section-title">Winx Chaos ✨</h2>
+  
+ <div class="friends-menu">
+  <button onclick="selectFriend('flora')" class="friend-btn">Flora</button> 
+  
+  <button onclick="selectFriend('radaB')" class="friend-btn">radaB</button>
+  <button onclick="selectFriend('yulinda')" class="friend-btn">yulinda</button>
+  <button onclick="selectFriend('mother')" class="friend-btn">mother</button>
+  <button onclick="selectFriend('aliyuh')" class="friend-btn">aliyuh</button>
+  <button onclick="selectFriend('me-anne')" class="friend-btn">me-anne</button>
+  <button onclick="selectFriend('Richard')" class="friend-btn">Richard</button>
+  <button onclick="selectFriend('Lasya')" class="friend-btn">Lasya</button>
+</div>
+
+  <div id="activeFriendHeader" style="text-align: center; margin: 20px 0;">
+    <h3 id="currentFriendName" style="color: #ff1493; font-family: 'Lucida Handwriting', cursive;">Select a bilat</h3>
+    <button id="drawBtn" onclick="openDrawingMode()" class="ig-button" style="display:none; margin: 0 auto; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
+      ✨ Doodle for <span id="btnFriendName"></span>
+    </button>
+  </div>
+
+  <div id="gabGalleryContainer" class="gallery-dynamic"></div>
+</div>
+
+
+
+    <div id="Letter" data-tab-content>
+      <h2 class="section-title">Letter</h2>
+      <p class="introduction">
+        This section will contain a special letter dedicated to our friendship.
+      </p>
+    </div>
+  </div>
+
+  <div id="lightbox">
+    <span class="close" onclick="closeLightbox()">✖</span>
+    <span class="prev">❮</span>
+    <img id="lightbox-img">
+    <span class="next">❯</span>
+  </div>
+
+  <div id="drawingModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; flex-direction:column; align-items:center; justify-content:center;">
+  <div class="drawing-controls">
+    <input type="color" id="brushColor" value="#ff1493">
+    <input type="range" id="brushSize" min="1" max="20" value="5">
+    <button onclick="clearCanvas()" class="ig-button" style="width:auto; background:#8e8e8e;">Clear</button>
+    <button onclick="saveDrawing()" class="ig-button" style="width:auto; background:#ff1493;">Save to Gallery</button>
+    <button onclick="closeDrawing()" class="ig-button" style="width:auto; background:#ed4956;">Done</button>
+  </div>
+  <canvas id="paintCanvas"></canvas>
+</div>
+
+</body>
+</html>
