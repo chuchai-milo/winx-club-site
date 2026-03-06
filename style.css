@@ -505,3 +505,113 @@ body {
     box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
 }
 
+/* Instagram Profile Header */
+.ig-profile-header {
+  display: flex;
+  padding: 20px 0;
+  margin: 0 auto;
+  max-width: 600px;
+  gap: 30px;
+  align-items: center;
+}
+
+.profile-pic-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.ig-profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dbdbdb;
+  padding: 3px;
+}
+
+.profile-stats-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.profile-username-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.ig-username {
+  font-size: 20px;
+  font-weight: 300;
+  margin: 0;
+}
+
+.ig-edit-btn {
+  background-color: #efefef;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 15px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.profile-stats-row {
+  display: flex;
+  gap: 20px;
+  font-size: 16px;
+}
+
+.profile-bio {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.bio-name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.bio-text {
+  margin: 0;
+}
+
+/* Mobile Responsive adjustment */
+@media (max-width: 480px) {
+  .ig-profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  .profile-stats-row {
+    justify-content: center;
+  }
+  .profile-username-row {
+    justify-content: center;
+  }
+}
+
+.media-item {
+  position: relative;
+}
+
+.ig-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.3);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none; /* Allows you to still click the image behind it */
+  font-weight: bold;
+}
+
+.media-item:hover .ig-overlay {
+  opacity: 1;
+}
